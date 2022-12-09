@@ -8,6 +8,7 @@ const WorkoutForm = () => {
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState("");
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +17,7 @@ const WorkoutForm = () => {
 
     const response = await fetch("/api/workouts", {
       method: "POST",
-      body: JSON.stringify(workout), 
+      body: JSON.stringify(workout),
       headers: {
         "Content-Type": "application/json",
       },
@@ -25,12 +26,14 @@ const WorkoutForm = () => {
 
     if (!response.ok) {
       setError(json.error);
+      setEmptyFields(json.emptyFields);
     }
     if (response.ok) {
       setError(null);
       setTitle("");
       setLoad("");
       setReps("");
+      setEmptyFields([]);
       dispatch({ type: "CREATE_WORKOUT", payload: json });
     }
   };
