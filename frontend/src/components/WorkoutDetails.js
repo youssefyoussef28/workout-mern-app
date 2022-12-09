@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { WorkoutsContext } from "../context/WorkoutsContext";
+
 const WorkoutDetails = ({ workout }) => {
+  const { deleteWorkout } = useContext(WorkoutsContext);
+
+
+
   return (
     <div className="workout-details">
       <h4>{workout.title}</h4>
@@ -11,6 +18,13 @@ const WorkoutDetails = ({ workout }) => {
         {workout.reps}
       </p>
       <p>{workout.createdAt}</p>
+      <span
+        onClick={() => {
+          deleteWorkout(workout._id);
+        }}
+      >
+        Delete
+      </span>
     </div>
   );
 };
