@@ -9,6 +9,7 @@
 :root {
   --primary: #1aac83;
   --error: #e7195a;
+  --error: #e7195a;
 }
 body {
   background: #f1f1f1;
